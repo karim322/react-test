@@ -1,0 +1,255 @@
+:root{
+  --heroTextMarginLeft:28%;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+main{
+  position: relative;
+  width: 100%;
+  height: 95%;
+  max-height:95%;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+main header{
+  padding:15px;
+  width:100%;
+  background: transparent;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header img{
+  border-radius: 10px;
+  width:100px;
+  margin-bottom: 5px;
+
+}
+header p{
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  align-self: flex-end;
+  margin:0px 0px 4px -16%;
+}
+header div{
+  display: flex;
+  gap:15%;
+  align-items: center;
+}
+header a{
+  position:relative;
+  font-size: 16px;
+  font-weight: 600;
+  color:white;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 1000;
+  transition:width 500ms ,scale 100ms;
+}
+header a:after{
+  content: ' ';
+  display: block;
+  width: 0px;
+  height: 2px;
+  background: white;
+  transition: 500ms;
+}
+header a:hover{
+  color:orange;
+}
+header a:hover:not(.logo):after{
+  width:100%;
+  background: orange;
+}
+header a:active:not(.logo){
+  scale:.90;
+}
+main #hero-scroll-container{
+  position:absolute;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow: hidden;
+  display: flex;
+}
+#hero-scroll-container > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  height:100%;
+  overflow:hidden;
+}
+#hero-scroll-container > div:first-of-type{
+  width:100%;
+  height:100%;
+}
+#hero-scroll-container >div:not(:first-child){
+  position: absolute;
+  right: 0;
+  width:0px;
+  direction: rtl;
+}
+#hero-scroll-container >div.visibleDiv{
+  width:100%;
+  transition: width 2s ;
+}
+#hero-scroll-container >div.prevVisibileDiv{
+  translate: -60%;
+  transition:translate 3s;
+}
+#hero-scroll-container >div>img{
+  position: absolute;
+  min-width:100vw;
+  min-height: 100%;
+  object-position: center;
+  object-fit: cover;
+  filter: brightness(60%);
+  z-index: -1;
+}
+#hero-scroll-container > div p{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  padding:0px 0px 0px 22%;
+  font-size: 55px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  direction: ltr;
+  text-wrap:nowrap;
+}
+#hero-scroll-container > div p span{
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.siteGlimpse{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  gap:10%;
+  padding:2.5% 10px;
+  background:rgba(0, 38, 50, 0.945);
+  color:white;
+}
+.siteGlimpse img{
+  width:10vh;
+  height: 9vh;
+  border-radius: 15px;
+}
+.siteGlimpse>div:first-child{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:5%;
+  text-wrap: nowrap;
+  font-size: 1.4vw;
+  font-weight: 400;
+  translate:-150px;
+  opacity:0;
+  transition: 1s;
+}
+.siteGlimpse .textDiv{
+  max-width: 30%;
+  translate:150px;
+  opacity:0;
+  transition: 1s;
+}
+.siteGlimpse>div.ontoViewDiv{
+  translate: 0 ;
+  opacity: 1;
+}
+.homeProjects{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap:40px;
+  padding:5% 5%;
+  font-size: 50px;
+  background:rgba(0, 21, 27, 0.945);
+  color:white;
+}
+.homeProjects>h3{
+  display: flex;
+  align-items: center;
+  gap:10px;
+}
+.homeProjects>h3:before,
+.homeProjects>h3:after{
+  content:' ';
+  width:80px;
+  height:2px;
+  background: orange;
+  transition: 500ms;
+}
+.homeProjects:hover>h3:before,
+.homeProjects:hover>h3:after{
+  width:200px;
+}
+.projectsContainer{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+  overflow: hidden;
+}
+.projectsCategigory{
+  flex:1;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  aspect-ratio: 1/1;
+  max-width: 24%;
+  min-width: 21%;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 10px;
+  font-size: 20px;
+  margin:10px auto;
+  transition: 500ms;
+  cursor:pointer;
+}
+.projectsCategigory h3{
+  display:flex;
+  flex-direction: column;
+  gap:40px;
+  opacity:0;
+  color:white;
+  z-index: 5;
+  transition: 500ms;
+}
+.projectsCategigory:hover{
+  box-shadow: 0px 0px 10px 1000px rgba(0, 0, 0, 0.432) inset;                                  
+  background-color: red;
+  background-size: 120%;
+}
+.projectsCategigory:hover h3{
+  opacity: 1;
+  gap: 0;
+}
+.homeProjects>a{
+  font-size: 25px;
+  border:1px solid;
+  padding:8px;
+  cursor: pointer;
+  transition: 300ms;
+  margin-top:10px;
+}
+.homeProjects>a:hover{
+  scale: 1.1;
+  color: orange;
+}
