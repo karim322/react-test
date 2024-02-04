@@ -1,4 +1,4 @@
-/*let heroInterval;
+let heroInterval;
 window.onload=()=>{
   let heroDiv =1;
   const heroArray = Array.from(document.querySelectorAll('#hero-scroll-container > div'));
@@ -15,7 +15,7 @@ window.onload=()=>{
       })
       heroDiv = 1;
     }
-  }, 8000);
+  }, 6000);
   window.onscroll=()=>{
   if(document.querySelector('.siteGlimpse').children.div1.getBoundingClientRect().top<window.innerHeight-100){
     Array.from(document.querySelector('.siteGlimpse').children).map((e)=>e.classList.add('ontoViewDiv'));
@@ -24,5 +24,5 @@ window.onload=()=>{
 }
 window.onabort=()=>{
   clearInterval(heroInterval)
-}*/
+}
 
