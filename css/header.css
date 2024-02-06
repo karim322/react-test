@@ -1,0 +1,61 @@
+header{
+  padding:15px;
+  width:100%;
+  background: transparent;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header>a{
+  padding: 0px 20px ;
+  background: white;
+  margin-top: -5px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+header img{
+  width:100px;
+  aspect-ratio: 1/1;
+}
+
+header p{
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  align-self: flex-end;
+  margin:0px 0px 4px -16%;
+}
+header div{
+  display: flex;
+  gap:15%;
+  align-items: center;
+}
+header a{
+  position:relative;
+  font-size: 16px;
+  font-weight: 600;
+  color:white;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 1000;
+  transition:width 500ms ,scale 100ms;
+}
+header a:after{
+  content: ' ';
+  display: block;
+  width: 0px;
+  height: 2px;
+  background: white;
+  transition: 500ms;
+}
+header a:hover{
+  color:orange;
+}
+header a:hover:not(.logo):after{
+  width:100%;
+  background: orange;
+}
+header a:active:not(.logo){
+  scale:.90;
+}
