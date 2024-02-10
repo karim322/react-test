@@ -12,3 +12,17 @@ body{
   min-height:100vh;
   overflow-x: hidden;
 }
+div a{
+  display: block;
+  transition: 500ms;
+  max-width:100%;
+  overflow: hidden;
+}
+.deleted{
+  display: block;
+  max-width:500px;
+}
+a h3,
+a p{
+  background: gray;
+}

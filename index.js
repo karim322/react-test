@@ -25,4 +25,3 @@ window.onload=()=>{
 window.onabort=()=>{
   clearInterval(heroInterval)
 }
-
