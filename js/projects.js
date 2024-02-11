@@ -1,3 +1,11 @@
+const projectsDisplay = document.querySelector('.projects-display');
+const navButtons = Array.from(document.querySelectorAll('.projects .projects-nav label'));
+const loadMoreButton = document.querySelector('button.loadMore');
+const paramValue = (new URLSearchParams(window.location.search)).get('q');
+let tempProjectList;
+let displayedProject;
+
+
 const createElements = async (arrayList)=>{
   const resultArray = await Promise.all(
     arrayList.map((e)=>{
@@ -17,34 +25,55 @@ const createElements = async (arrayList)=>{
   return resultArray
 }
 
-let tempProjectList;
-let displayedProject;
+const navButtonClick = (ButtonsList,currentButton)=>{
+  ButtonsList.map((e)=>e.classList.remove('active'));
+  currentButton.classList.add('active');
+}
+
+
+
+
 window.onload = async ()=>{
   const projectsList = await fetch('./../data/projects.json').then((e)=>e.json());
-  const paramValue = (new URLSearchParams(window.location.search)).get('q');
-  const projectsDisplay = document.querySelector('.projects-display');
-  const loadMoreButton = document.querySelector('button.loadMore');
-  
   if(!paramValue){
     tempProjectList = projectsList;
     displayedProject = projectsList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
   }else{
-    Array.from(document.querySelector('.projects .projects-nav').children).filter((e)=>e.dataset.name===paramValue)[0].click();
     tempProjectList = projectsList.filter((e)=>e.category===paramValue);
-    displayedProject = tempProjectList.slice(0,6);
+    displayedProject = tempProjectList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
   }
   loadMoreButton.innerText = tempProjectList > displayedProject?'Load More':'Loaded';
 
 
 
-  Array.from(document.querySelectorAll('.projects .projects-nav label')).forEach((e)=>{
-    e.onclick = ()=>{
-      
-      console.log(e.firstElementChild.checked)
-    }
-  })
+
   createElements(displayedProject).then((e)=>e.map((e)=>projectsDisplay.appendChild(e)));
 
 
-
+  navButtons.forEach((e)=>{
+    e.onclick = ()=>{
+      if(e.classList.contains('active')){
+        console.log('this button is clicked') ;
+        return null;
+      }else{
+        if(e.dataset.name==='ALL'){
+          navButtonClick(navButtons,e);
+          tempProjectList = projectsList;
+          displayedProject = projectsList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
+          Array.from(projectsDisplay.children).map((e)=>e.classList.add('fadeAway'));
+          while(projectsDisplay.firstElementChild){projectsDisplay.removeChild(projectsDisplay.firstElementChild)}
+          createElements(displayedProject).then((e)=>e.map((e)=>projectsDisplay.appendChild(e)));
+          console.log('All select');
+        }else{
+          navButtonClick(navButtons,e);
+          tempProjectList = projectsList.filter((el)=>el.category===e.dataset.name);
+          displayedProject = tempProjectList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
+          Array.from(projectsDisplay.children).map((e)=>e.classList.add('fadeAway'));
+          while(projectsDisplay.firstElementChild){projectsDisplay.removeChild(projectsDisplay.firstElementChild)}
+          createElements(displayedProject).then((e)=>e.map((e)=>projectsDisplay.appendChild(e)));
+          console.log(e.dataset.name+" "+'selected');
+        }
+      }
+    }
+  })
 }
