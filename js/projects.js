@@ -4,6 +4,7 @@ const loadMoreButton = document.querySelector('button.loadMore');
 const paramValue = (new URLSearchParams(window.location.search)).get('q');
 let tempProjectList;
 let displayedProject;
+let numOfProjects = 6 ;
 
 // function to create elements that will be displayed as projects as we use static html site 
 const createElements = async (arrayList)=>{
@@ -35,20 +36,16 @@ const navButtonClick = (ButtonsList,currentButton)=>{
 
 
 
-
 window.onload = async ()=>{
   const projectsList = await fetch('./../data/projects.json').then((e)=>e.json());
   //decide projects that will be displayed during the initial load based on search param
   if(!paramValue){
     tempProjectList = projectsList;
-    displayedProject = projectsList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
+    displayedProject = projectsList.sort((a,b)=>{return b.id - a.id}).slice(0,numOfProjects);
   }else{
     tempProjectList = projectsList.filter((e)=>e.category===paramValue);
-    displayedProject = tempProjectList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
+    displayedProject = tempProjectList.sort((a,b)=>{return b.id - a.id}).slice(0,numOfProjects);
   }
-
-  loadMoreButton.innerText = tempProjectList > displayedProject?'Load More':'Loaded';
-
 
 
 //function to create and append projects in initial load
@@ -66,7 +63,7 @@ window.onload = async ()=>{
         if(e.dataset.name==='ALL'){
           navButtonClick(navButtons,e);
           tempProjectList = projectsList;
-          displayedProject = projectsList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
+          displayedProject = projectsList.sort((a,b)=>{return b.id - a.id}).slice(0,numOfProjects);
           Array.from(projectsDisplay.children).map((e)=>e.classList.remove('fadeIn'));
           setTimeout(()=>{
             while(projectsDisplay.firstElementChild){projectsDisplay.removeChild(projectsDisplay.firstElementChild)};
@@ -76,7 +73,7 @@ window.onload = async ()=>{
         }else{
           navButtonClick(navButtons,e);
           tempProjectList = projectsList.filter((el)=>el.category===e.dataset.name);
-          displayedProject = tempProjectList.sort((a,b)=>{return b.id - a.id}).slice(0,6);
+          displayedProject = tempProjectList.sort((a,b)=>{return b.id - a.id}).slice(0,numOfProjects);
           Array.from(projectsDisplay.children).map((e)=>e.classList.remove('fadeIn'));
           setTimeout(()=>{
             while(projectsDisplay.firstElementChild){projectsDisplay.removeChild(projectsDisplay.firstElementChild)}
@@ -85,6 +82,19 @@ window.onload = async ()=>{
           setTimeout(()=>Array.from(projectsDisplay.children).map((e)=>e.classList.add('fadeIn')),530);
         }
       }
+      loadMoreButton.style.display = tempProjectList > displayedProject?'flex':'none';
     }
-  })
+  });
+
+  //decide to show or hide loadmore button in initial load
+  loadMoreButton.style.display = tempProjectList > displayedProject?'flex':'none';
+
+  //function for load more button when clicked//
+  loadMoreButton.onclick = ()=>{
+    const list = tempProjectList.slice(projectsDisplay.children.length,projectsDisplay.children.length+numOfProjects);
+    createElements(list).then((e)=>e.map((e)=>{e.classList.add('fadeIn');projectsDisplay.appendChild(e)}))
+    .then(()=>{//hiding load more button when content is finished//
+      loadMoreButton.style.display = projectsDisplay.children.length === tempProjectList.length?'none':'flex'
+    });
+  }
 }
