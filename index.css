@@ -7,6 +7,11 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
+html,
+body{
+  overflow-x: hidden;
+  width: 100%;
+}
 main{
   position: relative;
   width: 100%;
@@ -66,8 +71,8 @@ main #hero-scroll-container{
   display: flex;
   flex-direction: column;
   gap:20px;
-  padding:0px 0px 0px 22%;
-  font-size: 55px;
+  margin:0px 0px 0px 22%;
+  font-size: 3.4375rem;
   font-weight: 700;
   color: white;
   line-height: 1;
@@ -87,6 +92,7 @@ main #hero-scroll-container{
   padding:2.5% 10px;
   background:rgba(0, 38, 50, 0.945);
   color:white;
+  flex-wrap: wrap;
 }
 .siteGlimpse img{
   width:10vh;
@@ -99,7 +105,7 @@ main #hero-scroll-container{
   justify-content: center;
   gap:5%;
   text-wrap: nowrap;
-  font-size: 1.4vw;
+  font-size: 1.6875rem;
   font-weight: 400;
   translate:-150px;
   opacity:0;
@@ -203,3 +209,41 @@ main #hero-scroll-container{
   border-color:rgb(250, 209, 134);
 }
 
+@media screen and (max-width: 1001px) {
+  :root{
+    font-size: 14px;
+  }
+  #hero-scroll-container > div p{
+    flex:0;
+    margin: auto;
+    padding:20px;
+  }
+}
+@media screen and (max-width: 730px){
+  :root{
+    font-size: 14px;
+  }
+  .siteGlimpse .textDiv{
+    min-width:80%;
+    margin-top: 30px;
+  }
+  .projectsCategigory{
+    max-width: 32%;
+    min-width: 31%;
+  }
+}
+@media screen and (max-width: 600px){
+  :root{
+    font-size: 2.4vw;
+  }
+  .projectsCategigory{
+    max-width: 48%;
+    min-width: 48%;
+  }
+}
+@media screen and (max-width: 440px){
+  .projectsCategigory{
+    max-width: 90%;
+    min-width: 80%;
+  }
+}
