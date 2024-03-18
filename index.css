@@ -236,6 +236,9 @@ main #hero-scroll-container{
   :root{
     font-size: 2.4vw;
   }
+  .siteGlimpse{
+    font-size: 1.4rem;
+  }
   .projectsCategigory{
     max-width: 48%;
     min-width: 48%;

@@ -210,3 +210,20 @@ main{
 footer{
   padding: 10px 20px;
 }
+
+@media screen and (max-width: 800px) {
+  .whoUs img{
+    width:300px;
+    max-width: 90%;
+  }
+  .ourGoals .container div{
+    min-width:40%;
+    max-width:49%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .ourGoals .container div{
+    min-width:95%;
+    max-width:98%;
+  }
+}
